@@ -111,15 +111,18 @@ int main(void)
 		{
 		case 'N':
 			// TODO: handle command
+			puts("N or n was pressed\n");
 			break;
 		case 'L':
 			// TODO: handle command
+			puts("L or l was pressed\n");
 			break;
 		case 'R':
 			// TODO: handle command
+			puts("R or r was pressed\n");
 			break;
 		case 'E':
-			puts("Programm wird beendet.");
+			puts("Programm wird beendet.\n");
 			running = false;
 			break;
 		default:
