@@ -1,7 +1,7 @@
-typedef struct listNode
+typedef struct ListNode
 {
     char name[32];
     char number[32];
-    struct listNode *prev;
-    struct listNode *next;
-}listNode;
+    struct ListNode *prev;
+    struct ListNode *next;
+}ListNode;
