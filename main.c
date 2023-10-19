@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "list.h"
 
 static int xgetchar(void)
 {
@@ -98,6 +99,11 @@ static void prompt(const char *msg, char *buffer, size_t size)
  * TODO: Add static helper functions as needed.
  */
 
+static void printUser(ListNode *currentUser)
+{
+	printf("\n------------------------\nName: %s\nNummer: %s\n------------------------\n\n", currentUser->name, currentUser->number);
+}
+
 int main(void)
 {
 	// TODO: un-comment when you have implemented listRemoveAll()
@@ -110,12 +116,21 @@ int main(void)
 		switch (selection)
 		{
 		case 'N':
-			// TODO: handle command
-			puts("N or n was pressed\n");
+			char newName[32];
+			const char newNamePromtMessage[] = "\nBitte den Namen der neuen Person eingeben!\n";
+			const char newNumberPromtMessage[] = "Bitte Telefonnummer der neuen Person eingeben\n";
+
+			prompt(newNamePromtMessage, newName, 32);
+
+			ListNode *newListNode = listAdd(newName);
+
+			prompt(newNumberPromtMessage, newListNode->number, 32);
+
+			printUser(newListNode);
+
 			break;
 		case 'L':
-			// TODO: handle command
-			puts("L or l was pressed\n");
+			listForEach(printUser);
 			break;
 		case 'R':
 			// TODO: handle command
