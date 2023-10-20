@@ -43,21 +43,29 @@ static void initializeListNode(ListNode *newListNode, const char *name)
 
 ListNode *listAdd(const char *name)
 {
-    ListNode *newListNode = allocateSpaceForListnode();
-    initializeListNode(newListNode, name);
-
-    if (listIsEmpty())
+    if (validUserName(name))
     {
-        front = newListNode;
-        back = newListNode;
+        ListNode *newListNode = allocateSpaceForListnode();
+        initializeListNode(newListNode, name);
+
+        if (listIsEmpty())
+        {
+            front = newListNode;
+            back = newListNode;
+        }
+        else
+        {
+            back->next = newListNode;
+            back = newListNode;
+        }
+
+        return newListNode;
     }
     else
     {
-        back->next = newListNode;
-        back = newListNode;
+        pusts("Ungültiger Name (schon vergeben oder leerer String)");
+        return NULL;
     }
-
-    return newListNode;
 }
 
 void listForEach(void (*func)(ListNode *))
@@ -69,4 +77,21 @@ void listForEach(void (*func)(ListNode *))
         temp = temp->next;
     }
     return;
+}
+
+static bool validUserName(const char *name)
+{
+    listForEach(userNameAlreadyTaken);
+}
+
+static bool userNameAlreadyTaken(ListNode *currentNode, char *name)
+{
+    if (*(currentNode->name) == *name)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
