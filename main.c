@@ -116,6 +116,7 @@ int main(void)
 		switch (selection)
 		{
 		case 'N':
+		{
 			char newName[32];
 			const char newNamePromtMessage[] = "\nBitte den Namen der neuen Person eingeben!\n";
 			const char newNumberPromtMessage[] = "Bitte Telefonnummer der neuen Person eingeben\n";
@@ -129,6 +130,7 @@ int main(void)
 			printUser(newListNode);
 
 			break;
+		}
 		case 'L':
 			listForEach(printUser);
 			break;
