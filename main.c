@@ -136,9 +136,20 @@ int main(void)
 			listForEach(printUser);
 			break;
 		case 'R':
-			// TODO: handle command
-			puts("R or r was pressed\n");
+		{
+			char removeName[32];
+			const char removeNamePromptMessage[] = "\nWelcher Nutzer soll entfernt werden (name)?\n";
+
+			prompt(removeNamePromptMessage, removeName, 32);
+
+			int result = listRemoveByName(removeName);
+			if (result == -1)
+			{
+				puts("Kein Nutzer konnte unter diesem Namen entfernt werden!\n");
+			}
+
 			break;
+		}
 		case 'E':
 			puts("Programm wird beendet.\n");
 			running = false;
