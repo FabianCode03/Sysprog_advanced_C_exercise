@@ -19,7 +19,7 @@ static bool listIsEmpty()
     }
 }
 
-static ListNode *allocateSpaceForListnode()
+static ListNode *allocateSpaceForListNode()
 {
     ListNode *newListNode = (ListNode *)malloc(sizeof(ListNode));
     if (newListNode == NULL)
@@ -37,15 +37,51 @@ static void initializeListNode(ListNode *newListNode, const char *name)
 {
     strcpy(newListNode->name, name);
     newListNode->number[0] = '\0';
-    // newListNode->name = name;
-    // newListNode->number = "";
+}
+
+static bool userNameAlreadyTaken(const char *name)
+{
+    ListNode *temp = front;
+    while (temp != NULL)
+    {
+        if (strcmp(temp->name, name) == 0)
+        {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+
+static bool userNameIsEmpty(const char *name)
+{
+    for (int i = 0; name[i] != '\0'; i++)
+    {
+        if (name[i] != ' ')
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+static bool validUserName(const char *name)
+{
+    if (!userNameAlreadyTaken(name) && !userNameIsEmpty(name))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 ListNode *listAdd(const char *name)
 {
     if (validUserName(name))
     {
-        ListNode *newListNode = allocateSpaceForListnode();
+        ListNode *newListNode = allocateSpaceForListNode();
         initializeListNode(newListNode, name);
 
         if (listIsEmpty())
@@ -63,7 +99,7 @@ ListNode *listAdd(const char *name)
     }
     else
     {
-        pusts("Ungültiger Name (schon vergeben oder leerer String)");
+        puts("Ungültiger Name (schon vergeben oder leerer String)\n");
         return NULL;
     }
 }
@@ -77,21 +113,4 @@ void listForEach(void (*func)(ListNode *))
         temp = temp->next;
     }
     return;
-}
-
-static bool validUserName(const char *name)
-{
-    listForEach(userNameAlreadyTaken);
-}
-
-static bool userNameAlreadyTaken(ListNode *currentNode, char *name)
-{
-    if (*(currentNode->name) == *name)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
 }

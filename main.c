@@ -63,7 +63,7 @@ static int menu(void)
 				return selection;
 		}
 
-		puts("Falsche Eingabe!");
+		puts("Falsche Eingabe!\n");
 	}
 }
 
@@ -118,16 +118,17 @@ int main(void)
 		case 'N':
 		{
 			char newName[32];
-			const char newNamePromtMessage[] = "\nBitte den Namen der neuen Person eingeben!\n";
-			const char newNumberPromtMessage[] = "Bitte Telefonnummer der neuen Person eingeben\n";
+			const char newNamePromptMessage[] = "\nBitte den Namen der neuen Person eingeben!\n";
+			const char newNumberPromptMessage[] = "Bitte Telefonnummer der neuen Person eingeben\n";
 
-			prompt(newNamePromtMessage, newName, 32);
+			prompt(newNamePromptMessage, newName, 32);
 
 			ListNode *newListNode = listAdd(newName);
-
-			prompt(newNumberPromtMessage, newListNode->number, 32);
-
-			printUser(newListNode);
+			if (newListNode != NULL)
+			{
+				prompt(newNumberPromptMessage, newListNode->number, 32);
+				printUser(newListNode);
+			}
 
 			break;
 		}
