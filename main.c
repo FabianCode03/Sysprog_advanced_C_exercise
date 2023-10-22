@@ -107,7 +107,7 @@ static void printUser(ListNode *currentUser)
 int main(void)
 {
 	// TODO: un-comment when you have implemented listRemoveAll()
-	// atexit(listRemoveAll);
+	atexit(listRemoveAll);
 
 	bool running = true;
 	while (running)

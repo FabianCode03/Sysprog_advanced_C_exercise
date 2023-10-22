@@ -172,3 +172,13 @@ int listRemoveByName(const char *name)
     free(removedUser);
     return 0;
 }
+
+void freeListNode(ListNode *node)
+{
+    free(node);
+}
+
+void listRemoveAll(void)
+{
+    listForEach(freeListNode);
+}
