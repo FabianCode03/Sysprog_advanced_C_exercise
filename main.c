@@ -147,6 +147,14 @@ int main(void)
 			{
 				puts("Kein Nutzer konnte unter diesem Namen entfernt werden!\n");
 			}
+			else if (result == 0)
+			{
+				printf("\n\"%s\" wurde entfernt\n\n", removeName);
+			}
+			else
+			{
+				printf("\nKritischer Fehler in listRemoveByName()\n\n");
+			}
 
 			break;
 		}
