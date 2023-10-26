@@ -145,7 +145,7 @@ int main(void)
 			int result = listRemoveByName(removeName);
 			if (result == -1)
 			{
-				puts("Kein Nutzer konnte unter diesem Namen entfernt werden!\n");
+				puts("Nutzer konnte nicht entfernt werden!\n");
 			}
 			else if (result == 0)
 			{

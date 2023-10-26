@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <errno.h>
 #include "list.h"
 
 static ListNode *front = NULL;
@@ -24,7 +25,9 @@ static ListNode *allocateSpaceForListNode()
     ListNode *newListNode = (ListNode *)malloc(sizeof(ListNode));
     if (newListNode == NULL)
     {
+        errno = ENOMEM;
         perror("Fehler beim allokieren von speicher");
+        printf("(Fehlercode: %d)\n\n", errno);
         return NULL;
     }
     else
@@ -46,6 +49,9 @@ static bool userNameAlreadyTaken(const char *name)
     {
         if (strcmp(temp->name, name) == 0)
         {
+            errno = EEXIST;
+            perror("Fehler, der Name ist bereits vergeben");
+            printf("Fehlercode: %d\n\n", errno);
             return true;
         }
         temp = temp->next;
@@ -64,6 +70,9 @@ static ListNode *returnUserByName(const char *name)
         }
         temp = temp->next;
     }
+    errno = ENOENT;
+    perror("Kein Nutzer mit diesem Namen gefunden");
+    printf("(Fehlercode: %d)\n\n", errno);
     return NULL;
 }
 
@@ -117,7 +126,6 @@ ListNode *listAdd(const char *name)
     }
     else
     {
-        puts("Ungültiger Name (schon vergeben oder leerer String)\n");
         return NULL;
     }
 }
