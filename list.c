@@ -133,10 +133,12 @@ ListNode *listAdd(const char *name)
 void listForEach(void (*func)(ListNode *))
 {
     ListNode *temp = front;
+    ListNode *next;
     while (temp != NULL)
     {
+        next = temp->next;
         func(temp);
-        temp = temp->next;
+        temp = next;
     }
     return;
 }
